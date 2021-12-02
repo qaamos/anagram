@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta chartset="utf-8">
+        <title>Anagram</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'anagram/style.css' %}">
+    </head>
+    <body>
+        <h1>Anagram Generator</h1>
+        <form action="{% url 'anagram:generate' %}" method="post">
+        {% csrf_token %}
+        <textarea name="userinput" id="userinput">Enter word to generate anagrams...</textarea>
+        <div id="buttoncontainer">
+            <input type="submit" value="Generate">
+        </div>
+        </form>
+    </body>
+</html>
