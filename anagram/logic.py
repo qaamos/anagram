@@ -2,6 +2,7 @@ import itertools
 import sqlite3
 import os
 
+
 def main():
     word = ""
     wordPermutations = []
@@ -9,6 +10,18 @@ def main():
 
     con = connectToDb()
     word = input("Enter a word: ")
+    wordPermutations = generatePermutations(word)
+    anagrams = findWordsFromDict(wordPermutations, con)
+    print(anagrams)
+    con.close()
+    return 1
+
+
+def webRequest(word):
+    wordPermutations = []
+    anagrams = []
+
+    con = connectToDb()
     wordPermutations = generatePermutations(word)
     anagrams = findWordsFromDict(wordPermutations, con)
     print(anagrams)
@@ -36,4 +49,3 @@ def findWordsFromDict(permutations, connection):
             realWords.append(result[0])
     return realWords
 
-main()
