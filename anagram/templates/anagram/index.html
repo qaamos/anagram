@@ -10,7 +10,7 @@
         <h1>Anagram Generator</h1>
         <form action="{% url 'anagram:generate' %}" method="post">
         {% csrf_token %}
-        <textarea name="userinput" id="userinput">Enter word to generate anagrams...</textarea>
+        <textarea name="userinput" id="userinput" placeholder="Enter a word to generate anagrams..."></textarea>
         <div id="buttoncontainer">
             <input type="submit" value="Generate">
         </div>

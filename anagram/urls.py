@@ -6,5 +6,5 @@ app_name='anagram'
 urlpatterns = [
     path('', views.index, name='index'),
     path('generate/', views.generate, name='generate'),
-    path('result/', views.result, name='result'),
+    path('<int:word_id>/list/', views.list, name='list'),
 ]
