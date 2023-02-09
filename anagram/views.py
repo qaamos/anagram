@@ -8,7 +8,6 @@ from django import forms
 from anagram.models import Word
 from anagram import logic
 
-# Create your views here.
 def index(request):
     return render(request, 'anagram/index.html')
 
@@ -18,15 +17,19 @@ def generate(request):
         form = forms.Form(request.POST)
         if form.is_valid():
             input = request.POST.get('userinput')
-            wordExists = Word.objects.filter(wordText=input).exists()
-            if not wordExists:
-                word = Word(wordText=input)
-                word.save()
-            # logic.webRequest(input) TODO: make this work
-            return HttpResponseRedirect('/anagram/result/')
+            anagrams = logic.webRequest(input)
+            print(anagrams)
+            # TODO: also save anagrams for words
+            for anagram in anagrams:
+                wordExists = Word.objects.filter(wordText=anagram).exists()
+                if not wordExists:
+                    word = Word(wordText=anagram)
+                    word.save()
+            return HttpResponseRedirect('/anagram/result/') # TODO: make this work
     else:
         form = forms.Form()
     return render(request, 'anagram/index.html', {'form' : form})
 
 def result(request):
+    # TODO: display word & anagrams here and in template
     return render(request, 'anagram/result.html')
