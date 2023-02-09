@@ -44,8 +44,8 @@ def findWordsFromDict(permutations, connection):
     realWords = []
     cursor = connection.cursor()
     for permutation in permutations:
-        # TODO:SQL query should probably be sanitized
-        results = cursor.execute("SELECT word FROM dictionary WHERE word LIKE '" + permutation + "'")
+        # TODO: SQL query should probably be sanitized better
+        results = cursor.execute("SELECT word FROM dictionary WHERE word LIKE '%s'"%(permutation))
         for result in results:
             # check if word is already in realWords 
             try:
