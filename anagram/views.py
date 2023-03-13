@@ -1,6 +1,7 @@
 import re
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import generic
@@ -21,7 +22,7 @@ def generate(request):
         if form.is_valid():
 
             input = request.POST.get('userinput')
-            anagrams = logic.webRequest(input)
+            anagrams = logic.webRequest(input) # TODO: this shouldn't be run every time
 
             oldWordList = Word.objects.filter(wordText=input.capitalize())
             # if user inputs a new word
@@ -42,6 +43,6 @@ def generate(request):
     return render(request, 'anagram/index.html', {'form' : form}) # TODO: make this prettier
 
 def list(request, word_id):
-    # TODO: display anagrams here and in template
     word = get_object_or_404(Word, pk=word_id)
-    return render(request, 'anagram/list.html', {'word': word})
+    anagrams = get_list_or_404(Anagram, word=word_id)
+    return render(request, 'anagram/list.html', {'word': word, 'anagrams': anagrams})

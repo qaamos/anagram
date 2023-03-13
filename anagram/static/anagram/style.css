@@ -9,11 +9,40 @@ body {
     color:white;
 }
 
+.box {
+    background-color:darkslategray;
+    width: 30%;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+#anagramList {
+    display: inline-block;
+}
+
+#returnLink {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width:fit-content;
+    background-color: darkslategray;
+    color: white;
+    padding: 5px;
+    border-radius: 5px
+}
+
 #userinput {
     display: block;
     margin:auto;
     height: 100px;
     width: 30%;
+    border-radius: 5px;
 }
 
 #buttoncontainer {

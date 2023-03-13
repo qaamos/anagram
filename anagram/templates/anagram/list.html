@@ -8,9 +8,17 @@
     </head>
     <body>
         <h1>Anagrams for word: {{ word.wordText }}</h1>
-        <ul>
-            <div>juuh</div>
-            <div>elikkäs</div>
-        </ul>
+        <div class="box">
+            <ul id="anagramList">
+                {% for anagram in anagrams %}
+                <li>
+                    {{ anagram.anagramText }}
+                </li></br>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="returnLink">
+            <a href="{% url 'anagram:index' %}">Return</a>
+        </div>
     </body>
 </html>
