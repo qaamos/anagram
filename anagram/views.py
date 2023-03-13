@@ -22,21 +22,21 @@ def generate(request):
         if form.is_valid():
 
             input = request.POST.get('userinput')
-            anagrams = logic.webRequest(input) # TODO: this shouldn't be run every time
-
             oldWordList = Word.objects.filter(wordText=input.capitalize())
+
+            # if word and anagrams have already been generated
+            if oldWordList:
+                oldWord = oldWordList[0]
+                return HttpResponseRedirect(reverse('anagram:list', args=(oldWord.id,)))
             # if user inputs a new word
-            if not oldWordList and anagrams != []:
+            anagrams = logic.webRequest(input)
+            if anagrams != []:
                 newWord = Word(wordText=input.capitalize())
                 newWord.save()
                 for anagram in anagrams:
                     newAnagram = Anagram(word=newWord, anagramText=anagram)
                     newAnagram.save()
                 return HttpResponseRedirect(reverse('anagram:list', args=(newWord.id,)))
-            # if word and anagrams have already been generated
-            elif anagrams != []:
-                oldWord = oldWordList[0]
-                return HttpResponseRedirect(reverse('anagram:list', args=(oldWord.id,)))
             
     else:
         form = forms.Form()
